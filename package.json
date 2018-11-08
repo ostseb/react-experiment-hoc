@@ -1,14 +1,17 @@
 {
   "name": "react-experiment-hoc",
   "version": "0.0.1",
-  "description": "",
+  "description": "Simple hoc to provide a/b-test features.",
+  "keywords": [
+    "react","react-component","hoc","A/B","ab","A/B testing","A/B test"
+  ],
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "demo": "webpack-dev-server --mode development",
     "build": "babel src -d dist"
   },
-  "author": "",
+  "author": "Sebastian Österberg <sebastian.osterberg@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "axios": "^0.18.0",
