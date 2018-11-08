@@ -1,6 +1,9 @@
 # react-experiment-hoc
 A/B-test components with a simple hoc
 
+[![Latest Stable Version](https://img.shields.io/npm/v/react-experiment-hoc.svg)](https://www.npmjs.com/package/react-experiment-hoc)
+[![License](https://img.shields.io/npm/l/react-experiment-hoc.svg)](https://raw.githubusercontent.com/ostseb/react-experiment-hoc/master/LICENSE)
+
 ## Usage
 
 ```
