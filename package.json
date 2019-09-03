@@ -3,7 +3,13 @@
   "version": "0.0.1",
   "description": "Simple hoc to provide a/b-test features.",
   "keywords": [
-    "react","react-component","hoc","A/B","ab","A/B testing","A/B test"
+    "react",
+    "react-component",
+    "hoc",
+    "A/B",
+    "ab",
+    "A/B testing",
+    "A/B test"
   ],
   "main": "dist/index.js",
   "scripts": {
