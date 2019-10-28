@@ -205,10 +205,13 @@ export default (experiment, options = {}) => BaseComponent => {
       
       if (!this.state.started && variant)
         console.info(`[react-experiment-hoc] Render experiment "${experiment}" with variant "${variant}".`);
-      
+    
+      if (!variant) return null;
+        
       return (
         <BaseComponent
           {...this.props}
+          experimentName={experiment}
           experimentVariant={variant}
           experimentPlay={() => this.play(variant)}
           experimentWin={() => this.win(variant)}
