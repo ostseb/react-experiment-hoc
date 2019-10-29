@@ -1,6 +1,6 @@
 {
   "name": "react-experiment-hoc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple hoc to provide a/b-test features.",
   "keywords": [
     "react",
