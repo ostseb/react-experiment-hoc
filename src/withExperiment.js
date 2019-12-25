@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import hoistNonReactStatic from 'hoist-non-react-statics';
 import cookies from 'js-cookie';
 
 import Context from './Context';
@@ -222,5 +223,5 @@ export default (experiment, options = {}) => BaseComponent => {
 
   ExperimentComponent.contextType = Context;
 
-  return ExperimentComponent;
+  return hoistNonReactStatic(ExperimentComponent, BaseComponent);
 }
