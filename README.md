@@ -17,6 +17,7 @@ withExperiment(experiment-name, [options])(Component)
 | persistent | Wheter the experiment should be persistant for sesions. -1 evaluate on every render, 0 evaluate on every session, 1 evaluate once. | int | 1 |
 | autoPlay | Auto play experiment on render | bool | false |
 | fallbackName | Name of the fallback variation if fetch fails | string | 'original' |
+| propPrefix | Prefix for the prop names passed to BaseComponent | string | null |
 | onFetch | Fetch method returns variations of the given experiment | function<Promise> | Promise.resolve([]) |
 | onPlay | Trigger play | function<Promise> | Promise.resolve() |
 | onWin | Trigger win | function<Promise> | Promise.resolve() |

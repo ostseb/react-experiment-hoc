@@ -32,6 +32,13 @@ const DEFAULT_OPTIONS = {
   fallbackName: 'original',
 
   /**
+   * Prefix for the prop names passed to BaseComponent
+   * 
+   * @default null
+   */
+  propPrefix: null,
+
+  /**
    * Fetch method returns variations of the given experiment
    * 
    * @param experiment
@@ -208,14 +215,25 @@ export default (experiment, options = {}) => BaseComponent => {
         console.info(`[react-experiment-hoc] Render experiment "${experiment}" with variant "${variant}".`);
     
       if (!variant) return null;
-        
+
+      const prefix = name => {
+        if (!this._options.propPrefix)
+          return name
+          
+        return this._options.propPrefix + (name.charAt(0).toUpperCase() + name.slice(1))
+      }
+      
+      const props = {
+        ...this.props,
+        [prefix('experimentName')]: experiment,
+        [prefix('experimentVariant')]: variant,
+        [prefix('experimentPlay')]: () => this.play(variant),
+        [prefix('experimentWin')]: () => this.win(variant),
+      }
+      
       return (
         <BaseComponent
-          {...this.props}
-          experimentName={experiment}
-          experimentVariant={variant}
-          experimentPlay={() => this.play(variant)}
-          experimentWin={() => this.win(variant)}
+          {...props}
         />
       );
     }
