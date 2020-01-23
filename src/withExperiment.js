@@ -208,14 +208,20 @@ export default (experiment, options = {}) => BaseComponent => {
         console.info(`[react-experiment-hoc] Render experiment "${experiment}" with variant "${variant}".`);
     
       if (!variant) return null;
+
+      const uniqueTestProps = {
+        [experiment]: {
+          play: () => this.play(variant),
+          win: () => this.win(variant),
+          variant,
+          name: experiment
+        }
+      }
         
       return (
         <BaseComponent
           {...this.props}
-          experimentName={experiment}
-          experimentVariant={variant}
-          experimentPlay={() => this.play(variant)}
-          experimentWin={() => this.win(variant)}
+          {...uniqueTestProps}
         />
       );
     }
