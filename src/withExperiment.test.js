@@ -33,6 +33,14 @@ const RawComponent = p => (
   </>
 )
 
+const PrefixRawComponent = p => (
+  <>
+    <span>Hello {p.prefixExperimentName} using variant {p.prefixExperimentVariant}</span>
+    <button onClick={() => p.prefixExperimentPlay()}>Play experiment</button>
+    <button onClick={() => p.prefixExperimentWin()}>Win experiment</button>
+  </>
+)
+
 const renderHelper = (Component, options) => {
 
   return render(
@@ -101,4 +109,15 @@ test('it auto plays experiment', async () => {
   expect(onFetch).toHaveBeenCalledTimes(1)
   expect(onPlay).toHaveBeenCalledTimes(1)
   expect(onWin).toHaveBeenCalledTimes(0)
+})
+
+test('it renders with prefixed experiment props', async () => {
+  let Component = withExperiment('exp2', {
+    propPrefix: 'prefix'
+  })(PrefixRawComponent)
+  const { container } = renderHelper(Component, {
+    onFetch: jest.fn(_onFetch),
+  })
+
+  await wait (() => expect(container.querySelector('span').textContent).toEqual('Hello exp2 using variant var1'))
 })
