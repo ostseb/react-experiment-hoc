@@ -53,6 +53,7 @@ const DEFAULT_OPTIONS = {
    * 
    * @param experiment
    * @param variation
+   * @param data
    *  
    * @returns Promise() 
    * @default Promise.resolve()
@@ -60,10 +61,11 @@ const DEFAULT_OPTIONS = {
   onPlay: () => Promise.resolve([]),
 
   /**
-   * Trigger wib
+   * Trigger win
    * 
    * @param experiment
    * @param variation
+   * @param data
    *  
    * @returns Promise() 
    * @default Promise.resolve() 
@@ -169,7 +171,7 @@ export default (experiment, options = {}) => BaseComponent => {
       return variants[index].name;
     }
 
-    win(variant) {
+    win(variant, data) {
       if (!this.state.started)
         return console.warn(
           `[react-experiment-hoc] Experiment "${experiment}" triggerd win without beeing started. Make sure you trigger play before win.`
@@ -180,11 +182,11 @@ export default (experiment, options = {}) => BaseComponent => {
           `[react-experiment-hoc] Experiment "${experiment}" is using fallback. Win will not be registerd.`
         );
 
-      this._options.onWin(experiment, variant);
+      this._options.onWin(experiment, variant, data);
       console.info(`[react-experiment-hoc] Experiment "${experiment}" with variant "${variant}" win.`);
     }
 
-    play(variant) {
+    play(variant, data) {
       if (this.state.started)
         return console.warn(`[react-experiment-hoc] Experiment "${experiment}" has already started.`);
       
@@ -197,7 +199,7 @@ export default (experiment, options = {}) => BaseComponent => {
         started: true
       })
 
-      this._options.onPlay(experiment, variant);
+      this._options.onPlay(experiment, variant, data);
       console.info(`[react-experiment-hoc] Experiment "${experiment}" with variant "${variant}" started.`);
     }
 
@@ -227,8 +229,8 @@ export default (experiment, options = {}) => BaseComponent => {
         ...this.props,
         [prefix('experimentName')]: experiment,
         [prefix('experimentVariant')]: variant,
-        [prefix('experimentPlay')]: () => this.play(variant),
-        [prefix('experimentWin')]: () => this.win(variant),
+        [prefix('experimentPlay')]: (data = {}) => this.play(variant, data),
+        [prefix('experimentWin')]: (data = {}) => this.win(variant, data),
       }
       
       return (
