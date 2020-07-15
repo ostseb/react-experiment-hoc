@@ -142,7 +142,7 @@ export default (experiment, options = {}) => BaseComponent => {
 
           this.setState({
             fallback: true,
-            variant: fallbackVariant,
+            variant: fallbackName,
             variants: [fallbackVariant]
           })
         })
